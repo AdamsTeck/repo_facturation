@@ -41,13 +41,13 @@ class Invoice(models.Model):
     """
 
     INVOICE_TYPE = (
-        ("R", "RECU"),
-        ("P", "PROFORMA FACTURE"),
-        ("F", "FACTURE"),
+        ("R", "RECIEPT"),
+        ("P", "PROFORMA INVOICE"),
+        ("I", "INVOIVE"),
     )
 
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
-    invoice_date_time = models.DateTimeField(auto_created=True)
+    invoice_date_time = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(decimal_places=2, default=0.0, max_digits=12)
     paid = models.BooleanField(default=False)
     last_updated_date = models.DateField(null=True, blank=True)
