@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 
 
@@ -8,7 +9,7 @@
 
 <div class="row">
    <a href="{% url 'add-invoice' %} " class="btn col-md-4 btn-primary">
-      Register a new invoice <span class="badge text-bg-secondary"></span>
+     {% trans 'Register a new invoice' %}  <span class="badge text-bg-secondary"></span>
    </a>
 
    <a href='#' class="col-md-4">
@@ -16,7 +17,7 @@
    </a>
 
    <a href="{% url 'add-customer' %}" class="btn col-md-4 btn-primary">
-      Register a new customer<span class="badge text-bg-secondary"></span>
+      {% trans "Register a new customer" %}<span class="badge text-bg-secondary"></span>
    </a>
 
 </div>
@@ -32,12 +33,12 @@
       <thead>
          <tr>
             <th scope="col">#</th>
-            <th scope="col">CUSTOMERS NAME</th>
-            <th scope="col">DATE</th>
-            <th scope="col">TOTAL</th>
-            <th scope="col">PAID</th>
-            <th scope="col">TYPE OF INVOICE</th>
-            <th scope="col">ACTION</th>
+            <th scope="col">{% trans "CUSTOMERS NAME" %}</th>
+            <th scope="col">{% trans "DATE" %}</th>
+            <th scope="col">{% trans "TOTAL" %}</th>
+            <th scope="col">{% trans "PAID" %}</th>
+            <th scope="col">{% trans "TYPE OF INVOICE" %}</th>
+            <th scope="col">{% trans "ACTION" %}</th>
          </tr>
       </thead>
       <tbody id="myTable">
@@ -57,16 +58,16 @@
             </td>
             <td>{{facture.get_invoice_type_display }}</td>
             <td>
-               <a href=" {% url 'view-invoice' pk=facture.pk %}  " title="Detail" class="badge text-white bg-success">View</a>
+               <a href=" {% url 'view-invoice' pk=facture.pk %}  " title="Detail" class="badge text-white bg-success"> {% trans "View" %} </a>
 
                <button id="btn-invoice-sup" type="button" data-toggle="modal" data-target="#supprimer"
                   class="badge text-white bg-danger" title="Supprimer" data-id="{{ facture.pk }}"
-                  data-customer="{{facture.customer.name}}">Delete
+                  data-customer="{{facture.customer.name}}">{% trans "Delete" %}
                </button>
 
                <button id="btn-invoice-mod" type="button" data-toggle="modal" title="Modifier" data-target="#modifier"
                   data-id="{{facture.pk}}" data-customer="{{facture.customer.name}}" class="badge text-dark bg-warning">
-                  Modify
+                  {% trans "Modify" %}
                </button>
             </td>
          </tr>
@@ -77,10 +78,10 @@
          <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-left">
                {% if invoices.has_previous %}
-               <li class="page-item"><a class="page-link" href="?page={{ invoices.previous_page_number }}">Previous</a>
+               <li class="page-item"><a class="page-link" href="?page={{ invoices.previous_page_number }}">{% trans "Previous" %}</a>
                </li>
                {% else %}
-               <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+               <li class="page-item disabled"><a class="page-link" href="#">{% trans "Previous" %}</a></li>
                {% endif %}
                {% for num in invoices.paginator.page_range %}
                {% if num == invoices.number %}
@@ -90,9 +91,9 @@
                   {% endif %}
                   {% endfor %}
                   {% if invoices.has_next %}
-                  <li class="page-item"><a class="page-link" href="?page={{ invoices.next_page_number }}">Next</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ invoices.next_page_number }}">{% trans "Next" %}</a></li>
                   {% else %}
-                  <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                  <li class="page-item disabled"><a class="page-link" href="#">{% trans "Next" %}</a></li>
                   {% endif %}
             </ul>
          </nav>
@@ -100,7 +101,7 @@
 
          {% else %}
 
-         <p class="text-center text-white">No invoice found.</p>
+         <p class="text-center text-white">{% trans "No invoice found." %}</p>
          {% endif %}
 
 
@@ -115,7 +116,7 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title text-dark text-center" id="exampleModalLabel">Modification</h5>
+            <h5 class="modal-title text-dark text-center" id="exampleModalLabel">{% trans "Modification" %}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -126,19 +127,19 @@
 
                <input name="id_modified" type="hidden" id="id_modified">
 
-               <label id="label_id" class="text-dark checkbox-inline"> <strong id="strong_id"> This bill has been
-                     paid?</strong></label>
+               <label id="label_id" class="text-dark checkbox-inline"> <strong id="strong_id"> {% trans "This bill has been
+                  paid" %} ?</strong></label>
 
                <input type="radio" id="html" name="modified" value="True">
-               <label class="text-white bg-primary" for="html">Yes</label>
+               <label class="text-white bg-primary" for="html">{% trans "Yes" %}</label>
 
                <input type="radio" id="css" name="modified" value="False">
-               <label class="text-white bg-danger" for="css">No</label><br>
+               <label class="text-white bg-danger" for="css">{% trans "No" %}</label><br>
 
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button type="submit" class="btn btn-primary">Save</button>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+               <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
             </div>
          </form>
       </div>
@@ -152,7 +153,7 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title text-dark" id="sexampleModalLabel">Delete Invoice</h5>
+            <h5 class="modal-title text-dark" id="sexampleModalLabel">{% trans "Delete Invoice" %}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -161,12 +162,12 @@
             <form method="post">
                {% csrf_token %}
                <input name="id_supprimer" type="hidden" id="id_supprimer">
-               <label id="label_id_s" class="text-dark checkbox-inline"> <strong id="strong_id_s">Are you sure you want
-                     to delete the invoice ?</strong></label>
+               <label id="label_id_s" class="text-dark checkbox-inline"> <strong id="strong_id_s">{% trans "Are you sure you want
+                  to delete the invoice" %}?</strong></label>
 
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-danger">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                  <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
                </div>
             </form>
          </div>

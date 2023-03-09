@@ -7,6 +7,9 @@ from .utiles import get_invoice
 import datetime
 from django.http import HttpResponse
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 import pdfkit
 
 from django.template.loader import get_template
@@ -14,10 +17,15 @@ from django.template.loader import get_template
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 
 
+from .decorators import *
+
+from django.utils.translation import gettext_lazy as _
+
+
 # Create your views here.
 
 
-class HomeView(View):
+class HomeView(LoginRequiredSuperuserMixim, View):
     # Main View
 
     templates_name = 'index.html'
@@ -63,10 +71,10 @@ class HomeView(View):
                 else:
                     obj.paid = False
                 obj.save()
-                messages.success(request, "change made successfully.")
+                messages.success(request, _("change made successfully."))
             except Exception as e:
                 messages.error(
-                    request, f"Sorry, the following error has occured {e} ")
+                    request, _(f"Sorry, the following error has occured {e} "))
 
          # deleting an invoice
         if request.POST.get('id_supprimer'):
@@ -80,7 +88,7 @@ class HomeView(View):
         return render(request, self.templates_name, self.context)
 
 
-class AddCustomerView(View):
+class AddCustomerView(LoginRequiredSuperuserMixim, View):
     # add new customer
     template_name = 'add_customer.html'
 
@@ -118,7 +126,7 @@ class AddCustomerView(View):
         return render(request, self.template_name)
 
 
-class AddInvoiceView(View):
+class AddInvoiceView(View, LoginRequiredSuperuserMixim):
 
     # add a new invoice View
 
@@ -184,7 +192,7 @@ class AddInvoiceView(View):
         return render(request, self.template_name, self.context)
 
 
-class InvoiceVieuw(View):
+class InvoiceVieuw(LoginRequiredSuperuserMixim, View):
 
     template_name = "invoice.html"
 
@@ -197,6 +205,7 @@ class InvoiceVieuw(View):
 # function to download invoice in pdf
 
 
+@superuser_required
 def get_invoice_download_pdf(request, *args, **kwargs):
     """generate pdf file from html file"""
 

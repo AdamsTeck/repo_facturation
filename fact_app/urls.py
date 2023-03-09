@@ -8,3 +8,5 @@ urlpatterns = [
     path('view-invoice/<int:pk>', views.InvoiceVieuw.as_view(), name='view-invoice'),
     path('pdf-download-invoice/<int:pk>', views.get_invoice_download_pdf, name='pdf-download-invoice'),
 ]
+
+

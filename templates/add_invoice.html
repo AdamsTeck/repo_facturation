@@ -20,7 +20,7 @@ invoice_type comment -->
         {% csrf_token %}
         <div class="form-group col-md-12">
             <!-- display the client list from model -->
-            <label for="gender">customer</label>
+            <label for="customer">customer</label>
             <select name="customer" class="form-control" required id="customer" id="customer">
                 <option>Choose the customer ..</option>
                 {% for customer in customers %}
@@ -79,8 +79,8 @@ invoice_type comment -->
 </form>
 <br /><br />
 <div class="row">
-    <button id="btn-add" class="btn btn-outline-danger w-50 col-md-6">Add a new item Line</button>
-    <button id="btn-remove" class="btn btn-outline-warning w-50 col-md-6">remove last item Line</button>
+    <button id="btn-add" class="btn btn-outline-success w-50 col-md-6">Add a new item Line</button>
+    <button id="btn-remove" class="btn btn-outline-danger w-50 col-md-6">remove last item Line</button>
 </div>
 <br /><br /><br />
 
