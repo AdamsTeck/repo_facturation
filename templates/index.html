@@ -2,76 +2,74 @@
 {% load static %}
 {% load i18n %}
 
-
-
 {% block content %}
 <br><br>
 
-<div class="row">
-   <a href="{% url 'add-invoice' %} " class="btn col-md-4 btn-primary">
-     {% trans 'Register a new invoice' %}  <span class="badge text-bg-secondary"></span>
-   </a>
-
-   <a href='#' class="col-md-4">
-      <span class="badge text-bg-secondary"></span>
-   </a>
-
-   <a href="{% url 'add-customer' %}" class="btn col-md-4 btn-primary">
-      {% trans "Register a new customer" %}<span class="badge text-bg-secondary"></span>
-   </a>
-
+<div class="row mb-3">
+   <div class="col-md-4">
+      <a href="{% url 'add-invoice' %}" class="btn btn-primary btn-block">
+         {% trans 'Register a new invoice' %}
+      </a>
+   </div>
+   <div class="col-md-4"></div>
+   <div class="col-md-4">
+      <a href="{% url 'add-customer' %}" class="btn btn-primary btn-block">
+         {% trans "Register a new customer" %}
+      </a>
+   </div>
 </div>
-
-<br> <br>
-
-<div class="form-group ">
-   <input id="search" class="form-control" type="text" placeholder="Search....">
+<div class="input-group mb-3">
+   <div class="input-group-prepend">
+      <span class="input-group-text" id="search-icon">
+         <i class="fas fa-search"></i>
+      </span>
+   </div>
+   <input id="search" class="form-control" type="text" placeholder="{% trans 'Search' %}">
 </div>
-
-<div>
-   <table class="table table-striped-columns">
+<div class="table-responsive">
+   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
          <tr>
             <th scope="col">#</th>
-            <th scope="col">{% trans "CUSTOMERS NAME" %}</th>
-            <th scope="col">{% trans "DATE" %}</th>
-            <th scope="col">{% trans "TOTAL" %}</th>
-            <th scope="col">{% trans "PAID" %}</th>
-            <th scope="col">{% trans "TYPE OF INVOICE" %}</th>
-            <th scope="col">{% trans "ACTION" %}</th>
+            <th scope="col">{% trans "Customer Name" %}</th>
+            <th scope="col">{% trans "Date" %}</th>
+            <th scope="col">{% trans "Total" %}</th>
+            <th scope="col">{% trans "Paid" %}</th>
+            <th scope="col">{% trans "Invoice Type" %}</th>
+            <th scope="col">{% trans "Actions" %}</th>
          </tr>
       </thead>
       <tbody id="myTable">
          {% if invoices %}
-         {% for facture in invoices %}
-         <tr>
-            <th scope="row">{{ facture.pk }}</th>
-            <td>{{facture.customer.name}}</td>
-            <td>{{facture.invoice_date_time}}</td>
-            <td>{{ facture.total }}</td>
-            <td>
-               {% if facture.paid %}
-               <img src="{% static 'images/icon-yes.svg' %}" alt="True">
-               {% else %}
-               <img src="{% static 'images/icon-no.svg' %}" alt="False">
-               {% endif %}
-            </td>
-            <td>{{facture.get_invoice_type_display }}</td>
-            <td>
-               <a href=" {% url 'view-invoice' pk=facture.pk %}  " title="Detail" class="badge text-white bg-success"> {% trans "View" %} </a>
-
-               <button id="btn-invoice-sup" type="button" data-toggle="modal" data-target="#supprimer"
-                  class="badge text-white bg-danger" title="Supprimer" data-id="{{ facture.pk }}"
-                  data-customer="{{facture.customer.name}}">{% trans "Delete" %}
-               </button>
-
-               <button id="btn-invoice-mod" type="button" data-toggle="modal" title="Modifier" data-target="#modifier"
-                  data-id="{{facture.pk}}" data-customer="{{facture.customer.name}}" class="badge text-dark bg-warning">
-                  {% trans "Modify" %}
-               </button>
-            </td>
-         </tr>
-         {% endfor %}
+            {% for facture in invoices %}
+               <tr>
+                  <td>{{ facture.pk }}</td>
+                  <td>{{ facture.customer.name }}</td>
+                  <td>{{ facture.invoice_date_time }}</td>
+                  <td>{{ facture.total }}</td>
+                  <td>
+                     {% if facture.paid %}
+                        <span class="badge badge-success">{% trans 'Paid' %}</span>
+                     {% else %}
+                        <span class="badge badge-danger">{% trans 'Unpaid' %}</span>
+                     {% endif %}
+                  </td>
+                  <td>{{ facture.get_invoice_type_display }}</td>
+                  <td>
+                     <div class="btn-group" role="group">
+                        <a href="{% url 'view-invoice' pk=facture.pk %}" class="btn btn-sm btn-primary" title="View">
+                           <i class="fas fa-eye">{% trans "View" %}</i>
+                        </a>
+                        <button id="btn-invoice-mod" type="button" data-toggle="modal" data-target="#modifier" class="btn btn-sm btn-warning" title="Modify" data-id="{{facture.pk}}" data-customer="{{facture.customer.name}}">
+                           <i class="fas fa-edit">{% trans "Modify" %}</i>
+                        </button>
+                        <button id="btn-invoice-sup" type="button" data-toggle="modal" data-target="#supprimer" class="btn btn-sm btn-danger" title="Delete" data-id="{{ facture.pk }}" data-customer="{{facture.customer.name}}">
+                           <i class="fas fa-trash">{% trans "Delete" %}</i>
+                        </button>
+                     </div>
+                  </td>
+               </tr>
+            {% endfor %}
 
          <!-- inserer le button de pagination -->
          {% if invoices.has_other_pages %}
@@ -206,7 +204,7 @@
 
 <script>
    {/* function de recherche sur la base de recherche index.html
-      TAF : faire la recherche en se basant sur l'identifiant unique d'une article 
+      TAF : faire la recherche en se basant sur l'identifiant unique d'un article 
       
    */}
    $(document).ready(function () {

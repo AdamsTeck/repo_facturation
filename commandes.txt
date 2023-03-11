@@ -1,0 +1,39 @@
+étapes pour héberger gratuitement une application web python sur la palteforme pythonanyware
+
+-Créez un compte gratuit sur PythonAnywhere.
+
+-Accédez au tableau de bord PythonAnywhere et cliquez sur "Start a new console" pour ouvrir une nouvelle console.
+
+-Créez un nouveau répertoire pour votre application en utilisant la commande "mkdir" suivie du nom de votre application.
+
+-Accédez au répertoire de votre application avec la commande "cd".
+
+-Créez un environnement virtuel pour votre application en utilisant la commande "mkvirtualenv" suivie du nom de votre environnement virtuel.
+
+-Activez l'environnement virtuel avec la commande "workon" suivie du nom de votre environnement virtuel.
+
+-Installez les dépendances de votre application en utilisant la commande "pip install" suivie du nom de votre fichier requirements.txt.
+
+-Créez un nouveau fichier WSGI en utilisant la commande "nano" suivie du nom de votre fichier WSGI.
+
+-Ajoutez le code Python nécessaire pour exécuter votre application web dans le fichier WSGI.
+
+-Créez un nouveau fichier de configuration pour votre application en utilisant la commande "nano" suivie du nom de votre fichier de configuration.
+
+-Ajoutez les détails de votre application, tels que le chemin d'accès de l'application et le nom de l'environnement virtuel dans le fichier de configuration.
+
+-Enregistrez et fermez les fichiers WSGI et de configuration.
+
+-Accédez à l'onglet "Web" de PythonAnywhere et cliquez sur "Add a new web app".
+
+-Suivez les étapes du formulaire pour configurer votre application, en sélectionnant le langage Python et en choisissant le chemin d'accès de l'application et le nom de l'environnement virtuel.
+
+-Cliquez sur "Next" pour configurer les paramètres du serveur Web.
+
+-Cliquez sur "Next" pour terminer la configuration de l'application.
+
+-Cliquez sur "Reload" pour charger votre application sur le serveur.
+
+-Accédez à l'URL de votre application pour vérifier qu'elle fonctionne correctement.
+
+Voilà, votre application web Python est maintenant hébergée gratuitement sur PythonAnywhere !

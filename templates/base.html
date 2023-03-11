@@ -12,10 +12,17 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.2.1/decimal.min.js"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    
     <title>Facture</title>
 </head>
 
@@ -26,8 +33,8 @@
 
     <!--header-->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href=" {% url 'home' %} ">INVOICE SYSTEM</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-black">
+            <a class="navbar-brand text-white" href=" {% url 'home' %} ">INVOICE SYSTEM</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,7 +44,7 @@
                 <ul class="navbar-nav mr-auto">
 
                     <div class="nav-item dropdown">
-                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link text-white dropdown-toggle" style="position: left;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">
                                 Languages
                                </a>
                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -48,7 +55,7 @@
                       </div>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false" style="position: center;">
                             More option
                         </a>
@@ -56,7 +63,7 @@
                             <a class="dropdown-item" href=" {% url 'add-customer' %} ">Add customer</a>
                             <a class="dropdown-item" href="#">Add admin</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">statistic</a>
+                            <a class="dropdown-item" href=" {% url 'statistic' %} ">statistic</a>
                         </div>
                     </li>
                 </ul>
@@ -98,51 +105,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
-
-    <!-- footer -->
-    <div class="footer-clean">
-        <footer>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3>Services</h3>
-                        <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3>About</h3>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Legacy</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3>Careers</h3>
-                        <ul>
-                            <li><a href="#">Job openings</a></li>
-                            <li><a href="#">Employee success</a></li>
-                            <li><a href="#">Benefits</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
-                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
-                                class="icon ion-social-snapchat"></i></a><a href="#"><i
-                                class="icon ion-social-instagram"></i></a>
-                        <br><br>
-                        <p style="text-align: center"> Copyright &copy; 2021-
-                            <script>document.write(new Date().getFullYear())</script>
-                            <a href="">adams-portfolio</a> All Rights Reserved
-                        </p>
-                    </div>
-                </div>
+ <br><br><br><br>
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                Copyright &copy; 2021-
+                <script>document.write(new Date().getFullYear())</script>
+                <a href="">adams-portfolio</a> All Rights Reserved
             </div>
-        </footer>
-    </div>
-    <!-- enfooter -->
+        </div>
+    </footer>
+    <!-- End of Footer -->
 
 </body>
 

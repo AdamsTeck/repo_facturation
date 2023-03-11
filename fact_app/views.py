@@ -1,3 +1,4 @@
+from ipaddress import summarize_address_range
 from django.shortcuts import render
 from django.views import View
 from .models import *
@@ -6,6 +7,7 @@ from django.db import transaction
 from .utiles import get_invoice
 import datetime
 from django.http import HttpResponse
+# from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,7 +21,12 @@ from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 
 from .decorators import *
 
+import matplotlib.pyplot as plt
+from django.db.models.functions import ExtractMonth, ExtractDay
+
 from django.utils.translation import gettext_lazy as _
+
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -234,3 +241,96 @@ def get_invoice_download_pdf(request, *args, **kwargs):
     response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
     return response
+
+
+# vue pour l'analyse statistique des données
+
+# class StatisticView(View):
+#     template_name = 'statistic.html'
+
+#     def get(self, request, *args, **kwargs):
+
+#         # Récupérer le nombre total de clients et factures
+#         num_customers = Customer.objects.all().count()
+#         num_invoices = Invoice.objects.all().count()
+
+#         total_price = Article.objects.all().aggregate(Sum('total'))[
+#             'total__sum'] or 0
+#         # print(total_price)
+
+#         # Calculer le revenu par mois
+#         revenue_per_month = Article.objects.filter(
+#             invoice__invoice_date_time__year=datetime.datetime.now().year
+#         ).annotate(
+#             month=ExtractMonth('invoice__invoice_date_time')
+#         ).values(
+#             'month'
+#         ).annotate(
+#             total_revenue=Sum('total')
+#         )
+
+#         # Créer les données pour le diagramme à barres
+#         months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+#                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        
+#         # week = ['Mon', 'Thus', 'Wn', 'th', 'fr', 'sat',
+#         #           'sun']
+#         revenue_data = [0] * 12
+#         for item in revenue_per_month:
+#             revenue_data[item['month'] - 1] = item['total_revenue']
+
+#         # Créer le diagramme à barres
+#         fig, ax = plt.subplots()
+#         ax.bar(months, revenue_data)
+#         ax.set_xlabel('Month')
+#         ax.set_ylabel('Revenue')
+
+#         # Enregistrer le diagramme à barres en tant qu'image
+#         plt.savefig('revenue.png')
+
+#         # Passer le nombre total de clients, factures et revenu Total au contexte du template
+#         context = {
+#             'num_customers': num_customers,
+#             'num_invoices': num_invoices,
+#             'total_price': total_price,
+#             'revenue_data': revenue_data,
+#         }
+
+#         return render(request, self.template_name, context=context)
+
+class StatisticView(View):
+    template_name = 'statistic.html'
+
+    def get(self, request, *args, **kwargs):
+
+        # Récupérer le nombre total de clients et factures
+        num_customers = Customer.objects.all().count()
+        num_invoices = Invoice.objects.all().count()
+
+        total_price = Article.objects.all().aggregate(Sum('total'))[
+            'total__sum'] or 0
+        # print(total_price)
+
+        # Calculer le revenu par mois
+        revenue_per_month = Article.objects.filter(
+            invoice__invoice_date_time__year=datetime.datetime.now().year
+        ).annotate(
+            month=ExtractMonth('invoice__invoice_date_time')
+        ).values(
+            'month'
+        ).annotate(
+            total_revenue=Sum('total')
+        )
+        revenue_data = [0] * 12
+        for item in revenue_per_month:
+            revenue_data[item['month'] - 1] = item['total_revenue']
+
+        # Passer le nombre total de clients, factures et revenu Total au contexte du template
+        context = {
+            'num_customers': num_customers,
+            'num_invoices': num_invoices,
+            'total_price': total_price,
+            'revenue_data': revenue_data,
+        }
+
+        return render(request, self.template_name, context=context)
