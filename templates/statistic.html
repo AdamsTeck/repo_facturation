@@ -7,49 +7,51 @@
   <h1 class="text-capitalize text-center mx-10 bg-dark text-white">STATISTIC</h1>
   <br /><br /><br /><br />
 
-  <div class="container">
-    <div class="row">
-      <!-- Earnings (Monthly) Card Example -->
-      <div class="col-xl-3 col-md-6 mb-5">
-        <div class="card border-left-primary shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre total des clients</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ num_customers }}</div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-md-6 mb-5">
-        <div class="card border-left-primary shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre total des factures</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ num_invoices }}</div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+  <div class="row justify-content-between">
+    <div class="container">
+      <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-5">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre total des clients</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{ num_customers }}</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xl-3 col-md-6 mb-5">
-        <div class="card border-left-primary shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Revenu total</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">#CFA {{ total_price }}</div>
+        <div class="col-xl-3 col-md-6 mb-5">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre total des factures</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{ num_invoices }}</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
               </div>
-              <div class="col-auto">
-                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-5">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Revenu total</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">#CFA {{ total_price }}</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
               </div>
             </div>
           </div>

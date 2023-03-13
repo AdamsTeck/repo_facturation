@@ -4,20 +4,35 @@
 
 {% block content %}
 <br><br>
-
-<div class="row mb-3">
+<div class="row justify-content-between">
    <div class="col-md-4">
-      <a href="{% url 'add-invoice' %}" class="btn btn-primary btn-block">
-         {% trans 'Register a new invoice' %}
+      <a href="{% url 'add-invoice' %}" style="text-decoration:none;">
+         <div class="card border-left-primary shadow h-100 py-2 text-center" style="color:white;">
+            <div class="card-body">
+               <div class="col mr-2">
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">
+                     {% trans 'Register a new invoice' %}
+                  </div>
+               </div>
+            </div>
+         </div>
       </a>
    </div>
-   <div class="col-md-4"></div>
    <div class="col-md-4">
-      <a href="{% url 'add-customer' %}" class="btn btn-primary btn-block">
-         {% trans "Register a new customer" %}
+      <a href="{% url 'add-customer' %}" style="text-decoration:none;">
+         <div class="card border-left-primary shadow h-100 py-2 text-center" style="color:white;">
+            <div class="card-body">
+               <div class="col mr-2">
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">
+                     {% trans "Register a new customer" %}
+                  </div>
+               </div>
+            </div>
+         </div>
       </a>
    </div>
 </div>
+<br><br>
 <div class="input-group mb-3">
    <div class="input-group-prepend">
       <span class="input-group-text" id="search-icon">
